@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bw.mapper.MeetingMapper">
+		<select id="selAll" resultType="com.bw.bean.Meeting">
+			SELECT m.*,t.`tname` FROM meeting m,mType t WHERE m.`tid` = t.`tid`
+		</select>
+		
+		<insert id="add" parameterType="com.bw.bean.Meeting">
+			insert into meeting
+			(code,name,start_time,end_time,tid,creat_time)
+			 values
+			 (#{code},#{name},#{start_time},#{end_time},#{tid},now())
+		</insert>
+		
+		<select id="selOne" resultType="com.bw.bean.Meeting" parameterType="int">
+			select * from meeting where mid = #{mid}
+		</select>
+		
+		<update id="update" parameterType="com.bw.bean.Meeting">
+			update meeting set code=#{code},name=#{name},start_time=#{start_time},end_time=#{end_time},creat_time=now(),tid=#{tid} where mid = #{mid}
+		</update>
+	</mapper>
